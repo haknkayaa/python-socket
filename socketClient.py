@@ -20,7 +20,7 @@ def client_program():
     message = input("Mesajiniz -> ")
     client_socket.send(message.encode())
 
-    while message.lower().strip() != "close":
+    while message.lower().strip() != "/close":
 
         data = client_socket.recv(1024).decode()
         print('Received from server: ' + data)

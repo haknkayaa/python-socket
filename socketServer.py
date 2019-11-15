@@ -4,6 +4,9 @@
     @author     : Hakan Kaya
     @mail       : mail@hakankaya.kim
     @description: Socket Server
+    /version : information for version
+    /close   : communatication close
+    /help    : helping guide
 
 """
 import socket
@@ -25,14 +28,25 @@ def server_program():
     while True:
         data = conn.recv(1024).decode()
         print(str(address) + " adresinden gelen mesaj: " + str(data))
-        message = "OK"
-        conn.send(message.encode())
-        """if not data:
-            break
-        # endif"""
 
-        #message = input("Mesaj göndermek icin -> ")
-        conn.send(message.encode())
+        if data == "/version":
+            message = "0.1"
+            conn.send(message.encode())
+        #endif
+
+        elif data == "/help":
+            message = "helping guide ...."
+            conn.send(message.encode())
+
+        elif data == "/close":
+            conn.close()
+        #endif
+
+        else:
+            message = "OK"
+            conn.send(message.encode())
+        #endelse
+
     # end while
 
     conn.close()
